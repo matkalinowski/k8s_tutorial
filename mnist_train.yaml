@@ -9,7 +9,7 @@ spec:
   restartPolicy: OnFailure
   containers:
   - name: mnist-tensorflow-keras
-    image: seedjeffwan/mnist_tensorflow_keras:1.13.1
+    image: 267419016345.dkr.ecr.us-east-2.amazonaws.com/matkalinowski/k8s_tutorial:latest
     command:
       - "python"
       - "mnist.py"
@@ -18,7 +18,7 @@ spec:
       - "--model_summary_path"
       - "s3://eks-ml-data/mnist/tf_summary"
       - "--epochs"
-      - "40"
+      - "5"
     env:
       - name: AWS_ACCESS_KEY_ID
         valueFrom:
