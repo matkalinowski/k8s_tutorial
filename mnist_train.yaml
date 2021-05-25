@@ -14,12 +14,14 @@ spec:
       - "python"
       - "mnist.py"
       - "--model_export_path"
-      - "s3://eks-ml-data/mnist/tf_saved_model"
+      - "s3://$S3_BUCKET/mnist/tf_saved_model"
       - "--model_summary_path"
-      - "s3://eks-ml-data/mnist/tf_summary"
+      - "s3://$S3_BUCKET/mnist/tf_summary"
       - "--epochs"
       - "5"
     env:
+      - name: AWS_REGION
+        value: $AWS_REGION
       - name: AWS_ACCESS_KEY_ID
         valueFrom:
           secretKeyRef:
@@ -30,5 +32,3 @@ spec:
           secretKeyRef:
             name: aws-secret
             key: AWS_SECRET_ACCESS_KEY
-      - name: AWS_REGION
-        value: us-west-2
