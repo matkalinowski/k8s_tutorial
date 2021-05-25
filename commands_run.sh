@@ -226,20 +226,16 @@ envsubst < mnist_train.yaml | kubectl create -f -
 #This will start a pod which will start the training and save the generated model in S3 bucket. Check status:
 kubectl get pods
 
-
-
-
-
-
-
-
 #https://managedkube.com/kubernetes/pod/failure/crashloopbackoff/k8sbot/troubleshooting/2019/02/12/pod-failure-crashloopbackoff.html
 export NAMESPACE=eksworkshop
-export PODNAME=myjupyter-0
-kubectl -n ${NAMESPACE} describe pod ${PODNAME}
+#export PODNAME=myjupyter-0
+#kubectl -n ${NAMESPACE} describe pod ${PODNAME}
 
 #pods for namespace
 kubectl get pods -n ${NAMESPACE}
 
 # logs
 kubectl -n ${NAMESPACE} logs ${PODNAME} myjupyter
+
+
+https://raw.githubusercontent.com/matkalinowski/k8s_tutorial/master/MNIST_INFERENCE.YAML
