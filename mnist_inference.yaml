@@ -67,7 +67,7 @@ spec:
           value: "true"
         - name: S3_ENDPOINT
           value: s3.$AWS_REGION.amazonaws.com
-        image: 267419016345.dkr.ecr.us-east-2.amazonaws.com/matkalinowski/k8s_tutorial:latest
+        image: tensorflow/serving:1.11.1
         imagePullPolicy: IfNotPresent
         livenessProbe:
           initialDelaySeconds: 30

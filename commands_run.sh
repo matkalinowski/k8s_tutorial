@@ -238,4 +238,25 @@ kubectl get pods -n ${NAMESPACE}
 kubectl -n ${NAMESPACE} logs ${PODNAME} myjupyter
 
 
-https://raw.githubusercontent.com/matkalinowski/k8s_tutorial/master/MNIST_INFERENCE.YAML
+#Run inference pod
+#A model from training was stored in the S3 bucket in previous section. Make sure S3_BUCKET and AWS_REGION environment variables are set correctly.
+curl -LO https://raw.githubusercontent.com/matkalinowski/k8s_tutorial/master/mnist_inference.yaml
+envsubst <mnist_inference.yaml | kubectl apply -f -
+
+#Wait for the containers to start and run the next command to check its status
+kubectl get pods -l app=mnist,type=inference
+
+kubectl port-forward `kubectl get pods -l=app=mnist,type=inference -o jsonpath='{.items[0].metadata.name}' --field-selector=status.phase=Running` 8500:8500
+
+curl -O https://bootstrap.pypa.io/get-pip.py
+python3 get-pip.py --user
+pip3 install requests tensorflow --user
+
+curl -LO https://eksworkshop.com/advanced/420_kubeflow/kubeflow.files/inference_client.py
+python inference_client.py --endpoint http://localhost:8500/v1/models/mnist:predict
+
+
+
+#kubectl delete -f mnist-training.yaml
+#kubectl delete -f mnist-inference.yaml
+
