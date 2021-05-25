@@ -1,14 +1,15 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: mnist-tensorflow-keras
+  name: mnist-training
   labels:
     app: mnist
+    type: training
     framework: tensorflow
 spec:
   restartPolicy: OnFailure
   containers:
-  - name: mnist-tensorflow-keras
+  - name: mnist-training
     image: 267419016345.dkr.ecr.us-east-2.amazonaws.com/matkalinowski/k8s_tutorial:latest
     command:
       - "python"
